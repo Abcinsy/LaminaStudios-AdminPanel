@@ -3,7 +3,7 @@
 namespace App\Admin\Controllers;
 
 use App\Http\Controllers\Controller;
-use OpenAdmin\Admin\Admin;
+use OpenAdmin\Admin\Facades\Admin;
 use OpenAdmin\Admin\Controllers\Dashboard;
 use OpenAdmin\Admin\Layout\Column;
 use OpenAdmin\Admin\Layout\Content;

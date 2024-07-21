@@ -4,6 +4,7 @@ use Illuminate\Routing\Router;
 use Illuminate\Support\Facades\Route;
 use OpenAdmin\Admin\Facades\Admin;
 use App\Admin\Controllers\ApplicantController;
+use App\Admin\Controllers\InternshipProgramController;
 
 Admin::routes();
 
@@ -17,5 +18,7 @@ Route::group([
     $router->get('/', 'HomeController@index')->name('home');
 
     $router->resource('applicants', ApplicantController::class);
+
+    $router->resource('internship-programs', InternshipProgramController::class);
 
 });
