@@ -15,22 +15,12 @@ class HomeController extends Controller
     {
         return $content
             ->css_file(Admin::asset("open-admin/css/pages/dashboard.css"))
-            ->title('Dashboard')
+            ->title('Welcome to the Admin Dashboard')
             ->description('Description...')
-            ->row(Dashboard::title())
-            ->row(function (Row $row) {
+            ->body('hello world');
 
-                $row->column(4, function (Column $column) {
-                    $column->append(Dashboard::environment());
-                });
+        // Direct rendering view, Since v1.6.12
+        // $content->view('dashboard', ['data' => 'foo']);
 
-                $row->column(4, function (Column $column) {
-                    $column->append(Dashboard::extensions());
-                });
-
-                $row->column(4, function (Column $column) {
-                    $column->append(Dashboard::dependencies());
-                });
-            });
     }
 }

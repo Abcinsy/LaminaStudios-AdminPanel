@@ -18,4 +18,12 @@
  *
  */
 
-OpenAdmin\Admin\Form::forget(['editor']);
+ use OpenAdmin\Admin\Facades\Admin;
+ use OpenAdmin\Admin\Form;
+ 
+ 
+ Form::forget(['editor']);
+ 
+ // Set the favicon, ensuring the correct path is used
+ Admin::favicon(asset('images/favicon.ico'));
+ 
