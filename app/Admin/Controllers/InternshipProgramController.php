@@ -30,8 +30,12 @@ class InternshipProgramController extends AdminController
         $grid->column('id', __('Id'));
         $grid->column('position', __('Position'));
         $grid->column('supervisor', __('Supervisor'));
-        $grid->column('active_applicants', __('Active Applicants'));
-        $grid->column('all_applicants', __('All Applicants'));
+        $grid->column('active_applicants', __('Active Applicants'))->display(function () {
+            return $this->active_applicants;
+        });
+        $grid->column('all_applicants', __('All Applicants'))->display(function () {
+            return $this->all_applicants;
+        });
         $grid->column('status', __('Status'));
 
         return $grid;
@@ -50,8 +54,12 @@ class InternshipProgramController extends AdminController
         $show->column('id', __('Id'));
         $show->column('position', __('Position'));
         $show->column('supervisor', __('Supervisor'));
-        $show->column('active_applicants', __('Active Applicants'));
-        $show->column('all_applicants', __('All Applicants'));
+        $show->column('active_applicants', __('Active Applicants'))->as(function () {
+            return $this->active_applicants;
+        });
+        $show->column('all_applicants', __('All Applicants'))->as(function () {
+            return $this->all_applicants;
+        });
         $show->column('status', __('Status'));
 
         return $show;
@@ -68,8 +76,6 @@ class InternshipProgramController extends AdminController
 
         $form->text('position', __('Position'));
         $form->text('supervisor', __('Supervisor'));
-        $form->number('active_applicants', __('Active Applicants'));
-        $form->number('all_applicants', __('All Applicants'));
         $form->select('status', __('Status'))->options([
             'active' => 'Active',
             'inactive' => 'Inactive'

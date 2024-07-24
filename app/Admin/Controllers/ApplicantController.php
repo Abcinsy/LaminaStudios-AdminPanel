@@ -7,6 +7,7 @@ use OpenAdmin\Admin\Form;
 use OpenAdmin\Admin\Grid;
 use OpenAdmin\Admin\Show;
 use App\Models\Applicant;
+use App\Models\Program;
 use Illuminate\Http\Request;
 
 class ApplicantController extends AdminController
@@ -16,7 +17,7 @@ class ApplicantController extends AdminController
      *
      * @var string
      */
-    protected $title = 'Applicant';
+    protected $title = 'Applicants';
 
     /**
      * Make a grid builder.
@@ -72,20 +73,14 @@ class ApplicantController extends AdminController
     {
         $form = new Form(new Applicant);
 
+        // Fetch the active positions from the Program model
+        $positions = Program::where('status', 'active')->pluck('position', 'position')->toArray();
+
         $form->text('first_name', __('First Name'));
         $form->text('last_name', __('Last Name'));
         $form->text('phone', __('Phone'));
         $form->email('email', __('Email'));
-        $form->select('position', __('Position'))->options([
-            'cybersecurity' => 'Cybersecurity',
-            'data_analytics' => 'Data Analytics',
-            'financial_management' => 'Financial Management',
-            'game_development' => 'Game Development',
-            'iot_system_development' => 'IoT System Development',
-            'network_administration' => 'Network Administration',
-            'ui_ux_design' => 'UI/UX Design',
-            'web_development' => 'Web Development',
-        ]);        
+        $form->select('position', __('Position'))->options($positions);        
         $form->select('status', __('Status'))->options([
             'pending' => 'Pending',
             'approved' => 'Approved',
