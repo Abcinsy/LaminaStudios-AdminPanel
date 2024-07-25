@@ -36,7 +36,20 @@ class InternshipProgramController extends AdminController
         $grid->column('all_applicants', __('All Applicants'))->display(function () {
             return $this->all_applicants;
         });
-        $grid->column('status', __('Status'));
+
+        // Apply color to status column
+        $grid->column('status', __('Status'))->display(function ($status) {
+            $class = '';
+            switch ($status) {
+                case 'active':
+                    $class = 'status-approved';
+                    break;
+                case 'inactive':
+                    $class = 'status-rejected';
+                    break;
+            }
+            return "<span class='$class'>$status</span>";
+        });
 
         // Filter by search term and status
         $grid->model()->when(request('search'), function ($query) {

@@ -18786,9 +18786,35 @@ main#main footer.fixed-bottom {
     margin-top: 15px
 }
 
-/* Sidebar form styling */
+
+/** Status Colors */
+.status-approved {
+    color: #0EA56F;
+    background-color: rgba(15, 170, 114, 0.1);
+    border-radius: 16px;
+    padding: 5px 10px;
+    text-transform: capitalize;
+}
+
+.status-rejected {
+    color: #DF3B48;
+    background-color: rgba(237, 87, 99, 0.1);
+    border-radius: 16px;
+    padding: 5px 10px;
+    text-transform: capitalize;
+}
+
+.status-pending {
+    color: #FBBC05;
+    background-color: rgba(243, 198, 73, 0.1);
+    border-radius: 16px;
+    padding: 5px 10px;
+    text-transform: capitalize;
+}
+
+/** Sidebar form styling */
 .sidebar-form {
-    flex-grow: 1; /* Allow the form to expand and take available space */
+    flex-grow: 1;
     transition: opacity .5s;
 }
 

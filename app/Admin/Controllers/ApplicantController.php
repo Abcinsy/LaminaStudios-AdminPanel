@@ -34,9 +34,31 @@ class ApplicantController extends AdminController
         $grid->column('phone', __('Phone'));
         $grid->column('email', __('Email'));
         $grid->column('position', __('Position'));
-        $grid->column('status', __('Status'));
-        $grid->column('created_at', __('Created at'));
-        $grid->column('updated_at', __('Updated at'));
+
+        // Apply color to status column
+        $grid->column('status', __('Status'))->display(function ($status) {
+            $class = '';
+            switch ($status) {
+                case 'approved':
+                    $class = 'status-approved';
+                    break;
+                case 'rejected':
+                    $class = 'status-rejected';
+                    break;
+                case 'pending':
+                    $class = 'status-pending';
+                    break;
+            }
+            return "<span class='$class'>$status</span>";
+        });
+
+        // Format the created_at column
+        $grid->column('created_at', __('Created at'))->display(function ($createdAt) {
+            return \Carbon\Carbon::parse($createdAt)->format('Y-m-d');
+        });
+
+        // Hide the column by default
+        $grid->column('updated_at', __('Updated at'))->hide();
 
         // Grid model for the table header
         $grid->header(function ($query) {
@@ -85,7 +107,7 @@ class ApplicantController extends AdminController
         $form->text('last_name', __('Last Name'));
         $form->text('phone', __('Phone'));
         $form->email('email', __('Email'));
-        $form->select('position', __('Position'))->options($positions);        
+        $form->select('position', __('Position'))->options($positions);
         $form->select('status', __('Status'))->options([
             'pending' => 'Pending',
             'approved' => 'Approved',
