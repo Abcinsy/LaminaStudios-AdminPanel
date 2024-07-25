@@ -31,11 +31,9 @@ class InternshipProgramController extends AdminController
         $grid->column('position', __('Position'));
         $grid->column('supervisor', __('Supervisor'));
         $grid->column('active_applicants', __('Active Applicants'))->display(function () {
-            return $this->active_applicants;
-        });
+            return $this->active_applicants; });
         $grid->column('all_applicants', __('All Applicants'))->display(function () {
-            return $this->all_applicants;
-        });
+            return $this->all_applicants; });
 
         // Apply color to status column
         $grid->column('status', __('Status'))->display(function ($status) {

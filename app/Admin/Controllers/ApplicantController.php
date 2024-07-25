@@ -8,7 +8,6 @@ use OpenAdmin\Admin\Grid;
 use OpenAdmin\Admin\Show;
 use App\Models\Applicant;
 use App\Models\Program;
-use Illuminate\Http\Request;
 
 class ApplicantController extends AdminController
 {
@@ -27,6 +26,9 @@ class ApplicantController extends AdminController
     protected function grid()
     {
         $grid = new Grid(new Applicant());
+
+        // Fetch distinct positions
+        $positions = Program::select('position')->distinct()->pluck('position', 'position');
 
         $grid->column('id', __('Id'));
         $grid->column('first_name', __('First Name'));
@@ -60,9 +62,26 @@ class ApplicantController extends AdminController
         // Hide the column by default
         $grid->column('updated_at', __('Updated at'))->hide();
 
+        // Filter by search term, position, and status
+        $grid->model()->when(request('search'), function ($query) {
+            $search = request('search');
+            $query->where('first_name', 'like', "%{$search}%")
+                ->orWhere('last_name', 'like', "%{$search}%");
+        });
+
+        $grid->model()->when(request('position'), function ($query) {
+            $position = request('position');
+            $query->where('position', $position);
+        });
+
+        $grid->model()->when(request('status'), function ($query) {
+            $status = request('status');
+            $query->where('status', $status);
+        });
+
         // Grid model for the table header
-        $grid->header(function ($query) {
-            return view('admin.applicant-table.applicant-header');
+        $grid->header(function ($query) use ($positions) {
+            return view('admin.applicant-table.applicant-header', compact('positions'));
         });
 
         return $grid;
@@ -71,7 +90,7 @@ class ApplicantController extends AdminController
     /**
      * Make a show builder.
      *
-     * @param mixed   $id
+     * @param mixed $id
      * @return Show
      */
     protected function detail($id)
