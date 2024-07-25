@@ -38,6 +38,23 @@ class InternshipProgramController extends AdminController
         });
         $grid->column('status', __('Status'));
 
+        // Filter by search term and status
+        $grid->model()->when(request('search'), function ($query) {
+            $search = request('search');
+            $query->where('position', 'like', "%{$search}%")
+                  ->orWhere('supervisor', 'like', "%{$search}%");
+        });
+
+        $grid->model()->when(request('status'), function ($query) {
+            $status = request('status');
+            $query->where('status', $status);
+        });
+
+        // Grid model for the table header
+        $grid->header(function ($query) {
+            return view('admin.internship.internship-header');
+        });
+
         return $grid;
     }
 

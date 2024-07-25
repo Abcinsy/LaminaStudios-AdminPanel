@@ -38,6 +38,11 @@ class ApplicantController extends AdminController
         $grid->column('created_at', __('Created at'));
         $grid->column('updated_at', __('Updated at'));
 
+        // Grid model for the table header
+        $grid->header(function ($query) {
+            return view('admin.applicant-table.applicant-header');
+        });
+
         return $grid;
     }
 
