@@ -79,9 +79,9 @@ class ApplicantController extends AdminController
             $query->where('status', $status);
         });
 
-        // Grid model for the table header
+        // Grid model for filtering
         $grid->header(function ($query) use ($positions) {
-            return view('admin.applicant-table.applicant-header', compact('positions'));
+            return view('admin.table.applicant.applicant-filter', compact('positions'));
         });
 
         return $grid;

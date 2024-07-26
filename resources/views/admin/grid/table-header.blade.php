@@ -27,7 +27,7 @@
 
     {{-- Custom Headers --}}
     @if(isset($gridModel) && $gridModel === 'Applicant')
-        @include('admin.applicant-table.applicant-header')
+        @include('admin.table.applicant.applicant-filter')
     @elseif(isset($gridModel) && $gridModel === 'Internship')
-        @include('admin.internship.internship-header')
+        @include('admin.table.internship.internship-filter')
     @endif

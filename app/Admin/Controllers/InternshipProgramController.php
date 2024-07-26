@@ -63,7 +63,7 @@ class InternshipProgramController extends AdminController
 
         // Grid model for the table header
         $grid->header(function ($query) {
-            return view('admin.internship.internship-header');
+            return view('admin.table.internship.internship-filter');
         });
 
         return $grid;

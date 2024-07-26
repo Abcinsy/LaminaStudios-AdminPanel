@@ -18434,7 +18434,7 @@ body label {
 
 .custom-navbar .navbar-brand span {
     display: block;
-    color: var(--menu-text);
+    color: #FBBC05;
     width: 100%;
     overflow: hidden
 }
@@ -18444,7 +18444,7 @@ body label {
 }
 
 .custom-navbar .navbar-brand :hover {
-    background: var(--menu-darker-bg)
+    background: #2B2925;
 }
 
 .custom-navbar .search {
