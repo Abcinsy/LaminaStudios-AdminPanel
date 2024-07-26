@@ -97,15 +97,15 @@ class ApplicantController extends AdminController
     {
         $show = new Show(Applicant::findOrFail($id));
 
-        $show->column('id', __('Id'));
-        $show->column('first_name', __('First Name'));
-        $show->column('last_name', __('Last Name'));
-        $show->column('phone', __('Phone'));
-        $show->column('email', __('Email'));
-        $show->column('position', __('Position'));
-        $show->column('status', __('Status'));
-        $show->column('created_at', __('Created at'));
-        $show->column('updated_at', __('Updated at'));
+        $show->field('id', __('Id'));
+        $show->field('first_name', __('First Name'));
+        $show->field('last_name', __('Last Name'));
+        $show->field('phone', __('Phone'));
+        $show->field('email', __('Email'));
+        $show->field('position', __('Position'));
+        $show->field('status', __('Status'));
+        $show->field('created_at', __('Created at'));
+        $show->field('updated_at', __('Updated at'));
 
         return $show;
     }
